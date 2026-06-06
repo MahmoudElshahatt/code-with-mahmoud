@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>محمود الشحات — تعلّم البرمجة | Learn Programming with Mahmoud</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='52' font-family='monospace' font-size='54' font-weight='800' fill='black' text-anchor='middle' dominant-baseline='central'%3E%26lt%3B%2F%26gt%3B%3C/text%3E%3C/svg%3E" />
+<meta name="description" content="دروس برمجة للأطفال والكبار في مصر: سكراتش وبايثون للأطفال، كوتلن وأندرويد للكبار، ودعم منهج الثانوية. Programming courses in Egypt." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    /* cohesive brand */
+    --bg:#0e1020;
+    --bg-soft:#161a33;
+    --surface:#ffffff;
+    --ink:#10142a;
+    --muted:#5b6178;
+    --line:#e7e9f2;
+    /* kids playful palette */
+    --kid-1:#ff5d8f;   /* pink */
+    --kid-2:#ffb020;   /* amber */
+    --kid-3:#22c1c3;   /* teal */
+    --kid-4:#7b61ff;   /* purple */
+    /* adults professional palette */
+    --pro-1:#2563eb;   /* blue */
+    --pro-2:#0ea5e9;   /* sky */
+    --pro-ink:#0b1220;
+    --grad-hero:linear-gradient(135deg,#7b61ff 0%,#2563eb 45%,#22c1c3 100%);
+    --grad-kid:linear-gradient(135deg,#ff5d8f,#ffb020);
+    --grad-pro:linear-gradient(135deg,#2563eb,#0ea5e9);
+    --radius:22px;
+    --shadow-sm:0 6px 18px rgba(16,20,42,.08);
+    --shadow-lg:0 22px 50px rgba(16,20,42,.18);
+    --maxw:1160px;
+    --font:"Rubik","Tajawal",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:#f6f7fc;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  html[dir="ltr"] body{text-align:left}
+  a{text-decoration:none;color:inherit}
+  img{max-width:100%}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  section{padding:84px 0;position:relative}
+  .eyebrow{
+    display:inline-block;font-weight:800;font-size:.82rem;letter-spacing:.5px;
+    color:var(--pro-1);background:rgba(37,99,235,.1);padding:6px 14px;border-radius:999px;margin-bottom:14px;
+  }
+  h2.sec-title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:900;line-height:1.25;margin-bottom:14px}
+  .sec-sub{color:var(--muted);font-size:1.05rem;max-width:640px;margin:0 auto 46px}
+  .center{text-align:center}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:60;
+    background:rgba(246,247,252,.85);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px;gap:14px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.15rem}
+  .brand .logo{
+    width:40px;height:40px;border-radius:12px;background:var(--grad-hero);
+    display:grid;place-items:center;color:#fff;font-weight:900;font-size:1.1rem;box-shadow:var(--shadow-sm)
+  }
+  nav.links{display:flex;gap:22px;align-items:center}
+  nav.links a{font-weight:700;color:var(--muted);font-size:.95rem;transition:color .2s}
+  nav.links a:hover{color:var(--pro-1)}
+  .nav-actions{display:flex;align-items:center;gap:10px}
+  .lang-toggle{
+    border:1.5px solid var(--line);background:#fff;border-radius:999px;
+    font-family:var(--font);font-weight:800;font-size:.85rem;cursor:pointer;
+    padding:8px 14px;display:flex;align-items:center;gap:6px;transition:.2s
+  }
+  .lang-toggle:hover{border-color:var(--pro-1);color:var(--pro-1)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;font-family:var(--font);font-weight:800;
+    border:none;cursor:pointer;border-radius:999px;padding:12px 22px;font-size:.95rem;transition:.22s;
+  }
+  .btn-primary{background:var(--grad-pro);color:#fff;box-shadow:var(--shadow-sm)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .btn-wa{background:#25D366;color:#fff}
+  .btn-wa:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(37,211,102,.4)}
+  .btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--pro-1);color:var(--pro-1)}
+  .menu-btn{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--bg);color:#fff;overflow:hidden;padding:96px 0 110px;
+    position:relative;isolation:isolate;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-2;
+    background:radial-gradient(900px 500px at 80% -10%,rgba(123,97,255,.45),transparent 60%),
+               radial-gradient(700px 500px at 0% 100%,rgba(34,193,195,.35),transparent 55%),
+               var(--bg);
+  }
+  .float-field{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .float-field span{
+    position:absolute;font-weight:900;color:rgba(255,255,255,.10);font-size:2rem;
+    animation:floaty linear infinite;user-select:none;
+  }
+  @keyframes floaty{
+    0%{transform:translateY(20px) rotate(0deg);opacity:0}
+    10%{opacity:1}
+    90%{opacity:1}
+    100%{transform:translateY(-120px) rotate(20deg);opacity:0}
+  }
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:90px;align-items:center}
+  .hero-copy{animation:riseIn .9s cubic-bezier(.2,.7,.2,1) both}
+  .hero h1{font-size:clamp(2rem,5.2vw,3.5rem);font-weight:900;line-height:1.2;margin-bottom:18px}
+  .hero h1 .hl{background:var(--grad-kid);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lead{font-size:1.12rem;color:rgba(255,255,255,.82);max-width:560px;margin-bottom:26px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+  .hero-badges{display:flex;gap:18px;flex-wrap:wrap;color:rgba(255,255,255,.7);font-size:.9rem;font-weight:700}
+  .hero-badges span{display:inline-flex;align-items:center;gap:6px}
+  .hero-art{position:relative;height:360px;animation:riseIn 1.1s .15s cubic-bezier(.2,.7,.2,1) both}
+  .orb{
+    position:absolute;border-radius:50%;display:grid;place-items:center;font-size:2.4rem;
+    box-shadow:var(--shadow-lg);
+  }
+  .orb.rocket{width:120px;height:120px;background:var(--grad-kid);top:10px;inset-inline-start:30%;animation:bounce 3s ease-in-out infinite}
+  .orb.robot{width:92px;height:92px;background:var(--grad-pro);top:120px;inset-inline-start:4%;animation:bounce 3.6s ease-in-out infinite .3s}
+  .orb.star{width:70px;height:70px;background:linear-gradient(135deg,#22c1c3,#7b61ff);top:120px;inset-inline-end:6%;animation:bounce 4s ease-in-out infinite .6s}
+  .code-card{
+    position:absolute;bottom:0;inset-inline-end:18%;background:#0b1020;border:1px solid rgba(255,255,255,.12);
+    border-radius:16px;padding:16px 18px;font-family:"JetBrains Mono",monospace;font-size:.8rem;
+    box-shadow:var(--shadow-lg);min-width:230px;animation:bounce 5s ease-in-out infinite;
+    direction:ltr;text-align:left;unicode-bidi:isolate;
+  }
+  .code-card .c1{color:#7b61ff}.code-card .c2{color:#22c1c3}.code-card .c3{color:#ffb020}.code-card .c4{color:#ff5d8f}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+  @keyframes riseIn{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ---------- STATS ---------- */
+  .stats{background:#fff;border-bottom:1px solid var(--line)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+  .stat .num{font-size:clamp(2rem,5vw,3rem);font-weight:900;background:var(--grad-hero);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+  .stat .lbl{color:var(--muted);font-weight:700;margin-top:6px;font-size:.95rem}
+
+  /* ---------- COURSES ---------- */
+  .courses{background:#f6f7fc}
+  .course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+  .card{
+    background:#fff;border-radius:var(--radius);padding:30px 26px;position:relative;
+    border:1px solid var(--line);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;
+    transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;inset-inline:0;top:0;height:6px}
+  .card.kids::before{background:var(--grad-kid)}
+  .card.adults::before{background:var(--grad-pro)}
+  .card.school::before{background:linear-gradient(135deg,#16a34a,#22c1c3)}
+  .card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg)}
+  .card .tag{
+    align-self:flex-start;font-weight:800;font-size:.78rem;padding:6px 12px;border-radius:999px;margin-bottom:14px;
+  }
+  .card.kids .tag{background:rgba(255,93,143,.12);color:var(--kid-1)}
+  .card.adults .tag{background:rgba(37,99,235,.12);color:var(--pro-1)}
+  .card.school .tag{background:rgba(22,163,74,.12);color:#16a34a}
+  .card .ico{font-size:2.4rem;margin-bottom:8px}
+  .card h3{font-size:1.3rem;font-weight:900;margin-bottom:6px}
+  .card .stack{color:var(--muted);font-weight:700;font-size:.92rem;margin-bottom:16px}
+  .price{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+  .price .amt{font-size:2.1rem;font-weight:900}
+  .price .per{color:var(--muted);font-weight:700;font-size:.9rem}
+  .duration{color:var(--muted);font-size:.88rem;font-weight:700;margin-bottom:18px}
+  .feat{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;flex:1}
+  .feat li{display:flex;gap:10px;align-items:flex-start;font-size:.95rem;color:#333}
+  .feat li::before{content:"✓";color:#16a34a;font-weight:900;flex:none}
+  .card .btn{width:100%;justify-content:center}
+  .popular{position:absolute;inset-inline-end:18px;top:18px;background:var(--grad-kid);color:#fff;font-weight:800;font-size:.72rem;padding:5px 12px;border-radius:999px}
+
+  /* ---------- WHY ---------- */
+  .why{background:#fff}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .why-item{padding:26px;border-radius:var(--radius);background:#f6f7fc;border:1px solid var(--line);transition:.25s}
+  .why-item:hover{transform:translateY(-6px);box-shadow:var(--shadow-sm)}
+  .why-item .ico{width:54px;height:54px;border-radius:14px;background:var(--grad-hero);display:grid;place-items:center;font-size:1.5rem;margin-bottom:14px}
+  .why-item h3{font-size:1.12rem;font-weight:900;margin-bottom:6px}
+  .why-item p{color:var(--muted);font-size:.95rem}
+
+  /* ---------- PROJECTS ---------- */
+  .projects{background:var(--bg);color:#fff}
+  .projects .sec-sub{color:rgba(255,255,255,.7)}
+  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .proj{
+    background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:26px;transition:.28s
+  }
+  .proj:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.3)}
+  .proj .emoji{font-size:2.6rem;margin-bottom:12px;display:block}
+  .proj h3{font-size:1.15rem;font-weight:900;margin-bottom:8px}
+  .proj p{color:rgba(255,255,255,.72);font-size:.94rem}
+  .proj .pill{display:inline-block;margin-top:14px;font-size:.78rem;font-weight:800;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.1)}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:#f6f7fc}
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:center}
+  .about-card{
+    background:var(--bg);border-radius:28px;padding:34px;color:#fff;text-align:center;box-shadow:var(--shadow-lg)
+  }
+  .avatar{
+    width:150px;height:150px;border-radius:50%;margin:0 auto 16px;background:var(--grad-hero);
+    display:grid;place-items:center;font-size:3rem;font-weight:900;box-shadow:var(--shadow-lg);overflow:hidden
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .about-card h3{font-size:1.4rem;font-weight:900}
+  .about-card .role{color:#22c1c3;font-weight:800;margin-bottom:14px}
+  .social{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+  .social a{
+    width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.1);
+    transition:.2s;color:#fff
+  }
+  .social a svg{width:22px;height:22px}
+  .social a:hover{background:#fff;color:var(--bg);transform:translateY(-3px)}
+  .about-text h2{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:900;margin-bottom:16px}
+  .about-text p{color:#3a4055;margin-bottom:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .chips span{background:#fff;border:1px solid var(--line);font-weight:700;font-size:.85rem;padding:7px 14px;border-radius:999px}
+
+  /* ---------- FAQ ---------- */
+  .faq{background:#fff}
+  .faq-list{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .faq-item{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#f6f7fc}
+  .faq-q{
+    width:100%;text-align:inherit;background:none;border:none;font-family:var(--font);
+    font-weight:800;font-size:1.02rem;padding:18px 20px;cursor:pointer;display:flex;
+    justify-content:space-between;align-items:center;gap:12px;color:var(--ink)
+  }
+  .faq-q .ar{transition:transform .25s;font-size:1.3rem;color:var(--pro-1);flex:none}
+  .faq-item.open .faq-q .ar{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted)}
+  .faq-a p{padding:0 20px 18px;font-size:.96rem}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact{background:var(--bg);color:#fff;position:relative;overflow:hidden}
+  .contact .wrap{position:relative;z-index:1}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+  .contact h2{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:900;margin-bottom:14px}
+  .contact p.lead{color:rgba(255,255,255,.75);margin-bottom:28px}
+  .contact-list{display:flex;flex-direction:column;gap:14px}
+  .contact-list a,.contact-list div{display:flex;align-items:center;gap:14px;font-weight:700;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px 16px;transition:.22s}
+  .contact-list a:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);transform:translateY(-3px)}
+  .contact-list .ic{width:46px;height:46px;border-radius:12px;background:var(--grad-pro);display:grid;place-items:center;font-size:1.2rem;flex:none}
+  .contact-list .txt{direction:ltr;text-align:start}
+  .pay-box{position:relative;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:30px;overflow:hidden}
+  .pay-box::before{content:"";position:absolute;inset-inline:0;top:0;height:5px;background:var(--grad-hero)}
+  .pay-box h3{font-size:1.22rem;font-weight:900;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .pay-box .pay-sub{color:rgba(255,255,255,.55);font-size:.86rem;font-weight:700;margin-bottom:18px}
+  .pay-method{display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);margin-bottom:14px;transition:.22s}
+  .pay-method:hover{background:rgba(255,255,255,.09);transform:translateY(-2px)}
+  .pay-method .badge{height:58px;border-radius:13px;display:grid;place-items:center;flex:none;background:#fff;border:1px solid rgba(255,255,255,.2)}
+  .pay-method .badge.vc{width:58px}
+  .pay-method .badge.vc svg{width:34px;height:34px;fill:#e60000}
+  .pay-method .badge.ip{padding:0 14px}
+  .pay-method .badge.ip svg{height:24px;width:auto;display:block}
+  .pay-method .info{flex:1;min-width:0}
+  .pay-method .num{font-weight:800;font-size:1.12rem;letter-spacing:.5px;direction:ltr;text-align:start}
+  .pay-method .nm{color:rgba(255,255,255,.6);font-size:.82rem;font-weight:700}
+  .copy-btn{background:rgba(255,255,255,.12);border:none;color:#fff;font-family:var(--font);font-weight:800;
+    font-size:1.4rem;line-height:1;padding:10px 14px;border-radius:11px;cursor:pointer;transition:.2s;flex:none;display:flex;align-items:center;justify-content:center;gap:5px}
+  .copy-btn:hover{background:#fff;color:var(--bg)}
+  .copy-btn.copied{background:#16a34a;color:#fff}
+  .pay-note{color:rgba(255,255,255,.62);font-size:.85rem;margin-top:16px;display:flex;gap:9px;align-items:flex-start;background:rgba(255,255,255,.04);padding:13px 15px;border-radius:13px}
+  footer.foot{background:#080a16;color:rgba(255,255,255,.6);text-align:center;padding:28px 0;font-size:.9rem}
+
+  /* ---------- DARK THEME ---------- */
+  html[data-theme="dark"]{
+    --surface:#161a2b;--ink:#e7e9f2;--muted:#9aa0b8;--line:#262b40;
+  }
+  html[data-theme="dark"] body{background:#0b0d18}
+  html[data-theme="dark"] .stats,
+  html[data-theme="dark"] .why,
+  html[data-theme="dark"] .faq{background:#10131f;border-color:#1d2236}
+  html[data-theme="dark"] .courses,
+  html[data-theme="dark"] .about{background:#0b0d18}
+  html[data-theme="dark"] .card,
+  html[data-theme="dark"] .chips span{background:#161a2b}
+  html[data-theme="dark"] .why-item,
+  html[data-theme="dark"] .faq-item{background:#10131f}
+  html[data-theme="dark"] header.nav{background:rgba(11,13,24,.85)}
+  html[data-theme="dark"] .lang-toggle,
+  html[data-theme="dark"] .btn-ghost{background:#161a2b;color:var(--ink)}
+  html[data-theme="dark"] nav.links.show{background:#10131f}
+  html[data-theme="dark"] .feat li,
+  html[data-theme="dark"] .about-text p{color:#c4c8da}
+  html[data-theme="dark"] .stat .lbl{color:#9aa0b8}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:920px){
+    .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+    .hero-art{height:300px;margin-top:10px}
+    .course-grid,.why-grid,.proj-grid{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:30px 20px}
+    nav.links{display:none}
+    nav.links.show{
+      display:flex;position:absolute;top:70px;inset-inline:0;flex-direction:column;
+      background:#fff;padding:18px 20px;border-bottom:1px solid var(--line);gap:14px;box-shadow:var(--shadow-sm)
+    }
+    .menu-btn{display:block}
+  }
+  @media(max-width:560px){
+    section{padding:60px 0}
+    .nav-actions .btn{display:none}
+    /* payment rows: let icon + number sit together, copy button drops full-width below */
+    .pay-box{padding:24px 18px}
+    .pay-method{flex-wrap:wrap;gap:12px;padding:14px}
+    .pay-method .badge{height:50px}
+    .pay-method .badge.vc{width:50px}
+    .pay-method .info{flex:1 1 0;min-width:120px}
+    .pay-method .num{font-size:1rem;letter-spacing:.3px}
+    .copy-btn{flex:1 1 100%;justify-content:center;padding:11px}
+  }
+  @media(max-width:360px){
+    .pay-method .num{font-size:.92rem}
+    .pay-method .badge{height:46px}
+    .pay-method .badge.vc{width:46px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#home"><span class="logo">‹/›</span><span data-i18n="brand">محمود الشحات</span></a>
+    <nav class="links" id="navLinks">
+      <a href="#courses" data-i18n="nav_courses">الدورات</a>
+      <a href="#why" data-i18n="nav_why">لماذا أنا</a>
+      <a href="#projects" data-i18n="nav_projects">المشاريع</a>
+      <a href="#about" data-i18n="nav_about">عن المدرّب</a>
+      <a href="#faq" data-i18n="nav_faq">الأسئلة</a>
+      <a href="#contact" data-i18n="nav_contact">تواصل</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" id="themeBtn" aria-label="theme" title="Dark / Light"><span id="themeIcon">🌙</span></button>
+      <button class="lang-toggle" id="langBtn">🌐 <span id="langLabel">EN</span></button>
+      <a class="btn btn-primary" href="#courses" data-i18n="nav_cta">ابدأ الآن</a>
+      <button class="menu-btn" id="menuBtn" aria-label="menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="float-field" id="floatField" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow" style="background:rgba(255,255,255,.12);color:#fff" data-i18n="hero_badge">🚀 تعلّم البرمجة من مطوّر محترف</span>
+      <h1 data-i18n="hero_title">تعلّم البرمجة من الصفر إلى <span class="hl">احتراف حقيقي</span></h1>
+      <p class="lead" data-i18n="hero_lead">دروس برمجة للأطفال والكبار في مصر — من ألعاب سكراتش وبايثون الممتعة، إلى بناء تطبيق أندرويد حقيقي بلغة كوتلن. تعليم عملي على يد مطوّر شحن أكثر من ٨ تطبيقات على جوجل بلاي.</p>
+      <div class="hero-cta">
+        <a class="btn btn-wa" id="heroWa" target="_blank" rel="noopener">💬 <span data-i18n="hero_cta1">احجز حصة تجريبية</span></a>
+        <a class="btn btn-ghost" href="#courses" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2)" data-i18n="hero_cta2">تصفّح الدورات</a>
+      </div>
+      <div class="hero-badges">
+        <span data-i18n="hero_b1">✅ بدون خبرة سابقة</span>
+        <span data-i18n="hero_b2">🎯 مشاريع عملية</span>
+        <span data-i18n="hero_b3">📱 أدوات حديثة</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="orb rocket">🚀</div>
+      <div class="orb robot">🤖</div>
+      <div class="orb star">⭐</div>
+      <div class="code-card">
+        <div><span class="c1">fun</span> <span class="c2">main</span>() {</div>
+        <div>&nbsp;&nbsp;<span class="c3">println</span>(<span class="c4">"Hello 👋"</span>)</div>
+        <div>&nbsp;&nbsp;<span class="c1">val</span> future = <span class="c2">you</span>()</div>
+        <div>}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" style="padding:48px 0">
+  <div class="wrap stats-grid">
+    <div class="stat"><div class="num" data-count="3" data-suffix="+">0</div><div class="lbl" data-i18n="stat1">سنوات خبرة احترافية</div></div>
+    <div class="stat"><div class="num" data-count="8" data-suffix="+">0</div><div class="lbl" data-i18n="stat2">تطبيقات على جوجل بلاي</div></div>
+    <div class="stat"><div class="num" data-count="50" data-suffix="+">0</div><div class="lbl" data-i18n="stat3">طالب وطالبة</div></div>
+    <div class="stat"><div class="num" data-count="1000" data-suffix="+">0</div><div class="lbl" data-i18n="stat4">مستخدم يومي للتطبيقات</div></div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="courses" id="courses">
+  <div class="wrap center">
+    <span class="eyebrow reveal" data-i18n="courses_eyebrow">الدورات والأسعار</span>
+    <h2 class="sec-title reveal" data-i18n="courses_title">اختر المسار المناسب لك</h2>
+    <p class="sec-sub reveal" data-i18n="courses_sub">ثلاثة مسارات مصمّمة بعناية — للأطفال، للكبار، ولطلاب الثانوية. اشترك مباشرة عبر واتساب.</p>
+    <div class="course-grid">
+
+      <!-- KIDS -->
+      <div class="card kids reveal">
+        <span class="popular" data-i18n="badge_fun">الأكثر متعة 🎮</span>
+        <span class="tag" data-i18n="kids_tag">للأطفال (8–13 سنة)</span>
+        <div class="ico">🧒🚀</div>
+        <h3 data-i18n="kids_title">البرمجة للأطفال</h3>
+        <div class="stack" data-i18n="kids_stack">Scratch + Python</div>
+        <div class="price"><span class="amt">650</span><span class="per" data-i18n="per_month">ج.م / شهريًا</span></div>
+        <div class="duration" data-i18n="months3">⏳ مدة الدورة: 3 أشهر</div>
+        <ul class="feat">
+          <li data-i18n="kids_f1">تعلّم ممتع قائم على الألعاب</li>
+          <li data-i18n="kids_f2">يبني الطفل ألعابًا حقيقية مثل Flappy Bird و Catch the Apple و Mario</li>
+          <li data-i18n="kids_f3">لا يحتاج أي خبرة سابقة</li>
+          <li data-i18n="kids_f4">تنمية التفكير المنطقي والإبداع</li>
+        </ul>
+        <a class="btn btn-wa enroll" data-course="kids" target="_blank" rel="noopener" data-i18n="enroll">اشترك الآن</a>
+      </div>
+
+      <!-- ADULTS -->
+      <div class="card adults reveal">
+        <span class="popular" style="background:var(--grad-pro)" data-i18n="badge_pro">احترافي 💼</span>
+        <span class="tag" data-i18n="adults_tag">للكبار والمبتدئين</span>
+        <div class="ico">👨‍💻📱</div>
+        <h3 data-i18n="adults_title">البرمجة للكبار</h3>
+        <div class="stack" data-i18n="adults_stack">Kotlin + Android Development</div>
+        <div class="price"><span class="amt">800</span><span class="per" data-i18n="per_month">ج.م / شهريًا</span></div>
+        <div class="duration" data-i18n="months3">⏳ مدة الدورة: 3 أشهر</div>
+        <ul class="feat">
+          <li data-i18n="adults_f1">من أساسيات كوتلن إلى بناء ونشر تطبيق أندرويد حقيقي</li>
+          <li data-i18n="adults_f2">مشاريع عملية بأسلوب احترافي</li>
+          <li data-i18n="adults_f3">أدوات حديثة مثل Jetpack Compose</li>
+          <li data-i18n="adults_f4">إرشاد مبني على خبرة صناعة حقيقية</li>
+        </ul>
+        <a class="btn btn-wa enroll" data-course="adults" target="_blank" rel="noopener" data-i18n="enroll">اشترك الآن</a>
+      </div>
+
+      <!-- SCHOOL -->
+      <div class="card school reveal">
+        <span class="tag" data-i18n="school_tag">طلاب الثانوية</span>
+        <div class="ico">🎓📚</div>
+        <h3 data-i18n="school_title">مادة البرمجة للثانوية</h3>
+        <div class="stack" data-i18n="school_stack">دروس خصوصية لمنهج الثانوية</div>
+        <div class="price"><span class="amt" style="font-size:1.5rem" data-i18n="contact_price">تواصل لمعرفة السعر</span></div>
+        <div class="duration" data-i18n="school_dur">⏳ حسب احتياج الطالب</div>
+        <ul class="feat">
+          <li data-i18n="school_f1">دعم مركّز على الامتحانات</li>
+          <li data-i18n="school_f2">فهم عملي للمنهج وليس حفظًا فقط</li>
+          <li data-i18n="school_f3">متابعة فردية وحل تمارين</li>
+          <li data-i18n="school_f4">رفع الدرجات والثقة في المادة</li>
+        </ul>
+        <a class="btn btn-wa enroll" data-course="school" target="_blank" rel="noopener" data-i18n="enroll">اشترك الآن</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="wrap center">
+    <span class="eyebrow reveal" data-i18n="why_eyebrow">لماذا تتعلّم معي</span>
+    <h2 class="sec-title reveal" data-i18n="why_title">خبرة صناعة حقيقية — لا مجرد نظريات</h2>
+    <p class="sec-sub reveal" data-i18n="why_sub">أعلّمك ما أستخدمه فعليًا في بناء تطبيقات يستعملها آلاف المستخدمين يوميًا.</p>
+    <div class="why-grid">
+      <div class="why-item reveal"><div class="ico">🏭</div><h3 data-i18n="why1_t">من قلب السوق</h3><p data-i18n="why1_d">أكثر من 3 سنوات كمطوّر أندرويد محترف في Awamer Alshabaka (AAIT) و Alexon Incorp.</p></div>
+      <div class="why-item reveal"><div class="ico">📲</div><h3 data-i18n="why2_t">تطبيقات حقيقية</h3><p data-i18n="why2_d">شحنت أكثر من 8 تطبيقات على جوجل بلاي: تجارة إلكترونية، نقل، طب عن بُعد، وخدمات عند الطلب.</p></div>
+      <div class="why-item reveal"><div class="ico">🧩</div><h3 data-i18n="why3_t">تعليم عملي</h3><p data-i18n="why3_d">كل درس يقودك لبناء شيء ملموس — لأن البرمجة تُتعلّم بالممارسة لا بالحفظ.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="wrap center">
+    <span class="eyebrow reveal" style="background:rgba(255,255,255,.12);color:#fff" data-i18n="proj_eyebrow">ماذا ستبني</span>
+    <h2 class="sec-title reveal" data-i18n="proj_title">مشاريع تخرج بها بنهاية الدورة</h2>
+    <p class="sec-sub reveal" data-i18n="proj_sub">تنتهي كل دورة ومعك مشروع حقيقي تفتخر به وتضيفه لمعرض أعمالك.</p>
+    <div class="proj-grid">
+      <div class="proj reveal"><span class="emoji">🐤</span><h3 data-i18n="p1_t">لعبة Flappy Bird</h3><p data-i18n="p1_d">يبني الطفل لعبته الأولى خطوة بخطوة في سكراتش ويلعبها مع أصدقائه.</p><span class="pill" data-i18n="p1_tag">Scratch · أطفال</span></div>
+      <div class="proj reveal"><span class="emoji">🍎</span><h3 data-i18n="p2_t">لعبة Catch the Apple</h3><p data-i18n="p2_d">منطق برمجي ممتع: حركة، نقاط، ومستويات — أساسيات التفكير البرمجي.</p><span class="pill" data-i18n="p2_tag">Python · أطفال</span></div>
+      <div class="proj reveal"><span class="emoji">🍄</span><h3 data-i18n="p4_t">لعبة Mario</h3><p data-i18n="p4_d">يبني الطفل لعبة ماريو الشهيرة بالقفز والعقبات والمستويات في سكراتش.</p><span class="pill" data-i18n="p4_tag">Scratch · أطفال</span></div>
+      <div class="proj reveal"><span class="emoji">👾</span><h3 data-i18n="p5_t">لعبة Shoot the Enemy</h3><p data-i18n="p5_d">لعبة إطلاق نار ممتعة: تصويب، أعداء، ونقاط — يتعلّم الطفل التحكم والمنطق.</p><span class="pill" data-i18n="p5_tag">Scratch · أطفال</span></div>
+      <div class="proj reveal"><span class="emoji">📱</span><h3 data-i18n="p3_t">تطبيق Family App</h3><p data-i18n="p3_d">من أول شاشة حتى استخدامه على هاتفك، باستخدام كوتلن وأحدث أدوات تطوير الهاتف.</p><span class="pill" data-i18n="p3_tag">Kotlin · كبار</span></div>
+      <div class="proj reveal"><span class="emoji">🛒</span><h3 data-i18n="p6_t">تطبيق متجر إلكتروني</h3><p data-i18n="p6_d">واجهة منتجات، سلة شراء، وتسجيل دخول — تطبيق تجارة إلكترونية حقيقي بلغة كوتلن.</p><span class="pill" data-i18n="p6_tag">Kotlin · كبار</span></div>
+      <div class="proj reveal"><span class="emoji">🌦️</span><h3 data-i18n="p7_t">تطبيق الطقس</h3><p data-i18n="p7_d">يتصل بـ API حقيقي لعرض حالة الطقس — يتعلّم الطالب الشبكات وعرض البيانات.</p><span class="pill" data-i18n="p7_tag">Kotlin · كبار</span></div>
+      <div class="proj reveal"><span class="emoji">✅</span><h3 data-i18n="p8_t">تطبيق المهام والملاحظات</h3><p data-i18n="p8_d">حفظ المهام محليًا على الهاتف مع إضافة وحذف وتعديل — أساسيات قواعد البيانات.</p><span class="pill" data-i18n="p8_tag">Kotlin · كبار</span></div>
+      <div class="proj reveal"><span class="emoji">🧮</span><h3 data-i18n="p9_t">تطبيق آلة حاسبة</h3><p data-i18n="p9_d">أول تطبيق بسيط وسهل: أزرار وعمليات حسابية — بداية مثالية لفهم بناء الواجهات.</p><span class="pill" data-i18n="p9_tag">Kotlin · كبار</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-card reveal">
+      <div class="avatar"><img src="instructor.jpg" alt="محمود الشحات" data-try="0" onerror="var t=['instructor.jpg','instructor.png','instructor.jpeg','instructor.webp','instructor.JPG','instructor.PNG','profile.jpg','profile.png','me.jpg'];var i=++this.dataset.try;if(i<t.length){this.src=t[i];}else{this.parentNode.textContent='م.ش';}" /></div>
+      <h3 data-i18n="about_name">محمود الشحات</h3>
+      <div class="role" data-i18n="about_role">مطوّر أندرويد ومدرّب برمجة</div>
+      <div class="social">
+        <a href="https://wa.me/201093729626" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.728-.978zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/mahmoudelshahatt/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/MahmoudElshahatt" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://mahmoud-elshahatt.lovable.app/" target="_blank" rel="noopener" title="Portfolio" aria-label="Portfolio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <span class="eyebrow" data-i18n="about_eyebrow">عن المدرّب</span>
+      <h2 data-i18n="about_h">من يعلّمك؟</h2>
+      <p data-i18n="about_p1">محمود الشحات — مطوّر أندرويد بخبرة تزيد عن 3 سنوات في Awamer Alshabaka (AAIT) و Alexon Incorp. خريج كلية الهندسة جامعة المنصورة (هندسة الحاسبات ونظم التحكم)، وحاصل على شهادة تطوير أندرويد من Udacity / MCIT.</p>
+      <p data-i18n="about_p2">شحنت أكثر من 8 تطبيقات على جوجل بلاي في مجالات التجارة الإلكترونية والنقل والطب عن بُعد والخدمات عند الطلب، يخدم بعضها آلاف المستخدمين يوميًا. أنقل لك هذه الخبرة العملية مباشرة.</p>
+      <div class="chips">
+        <span>Kotlin</span><span>Java</span><span>Python</span><span>Jetpack Compose</span><span>XML</span><span>Clean Architecture</span><span>MVVM / MVI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap center">
+    <span class="eyebrow reveal" data-i18n="faq_eyebrow">الأسئلة الشائعة</span>
+    <h2 class="sec-title reveal" data-i18n="faq_title">عندك سؤال؟</h2>
+    <div class="faq-list" style="margin-top:30px">
+      <div class="faq-item reveal"><button class="faq-q"><span data-i18n="faq1_q">هل تحتاج الدورة خبرة سابقة؟</span><span class="ar">+</span></button><div class="faq-a"><p data-i18n="faq1_a">لا. كل المسارات تبدأ من الصفر، سواء للأطفال أو الكبار، ونتدرّج خطوة بخطوة.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q"><span data-i18n="faq2_q">هل الدروس أونلاين أم حضوري؟</span><span class="ar">+</span></button><div class="faq-a"><p data-i18n="faq2_a">يمكن ترتيب الدروس أونلاين بالكامل. تواصل معي عبر واتساب لتحديد الأنسب لك.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q"><span data-i18n="faq3_q">ما هي طرق الدفع؟</span><span class="ar">+</span></button><div class="faq-a"><p data-i18n="faq3_a">الدفع عبر فودافون كاش أو إنستا باي على الرقم 01093729626.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q"><span data-i18n="faq4_q">كم مدة الدورة؟</span><span class="ar">+</span></button><div class="faq-a"><p data-i18n="faq4_a">دورتا الأطفال والكبار مدتهما 3 أشهر لكل منهما. أما دعم الثانوية فيكون حسب احتياج الطالب.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q"><span data-i18n="faq5_q">ماذا سيبني الطالب فعليًا؟</span><span class="ar">+</span></button><div class="faq-a"><p data-i18n="faq5_a">الأطفال يبنون ألعابًا حقيقية، والكبار يبنون وينشرون تطبيق أندرويد كامل على جوجل بلاي.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow" style="background:rgba(255,255,255,.12);color:#fff" data-i18n="contact_eyebrow">تواصل معي</span>
+      <h2 data-i18n="contact_h">جاهز تبدأ رحلتك في البرمجة؟</h2>
+      <p class="lead" data-i18n="contact_lead">اسألني عن أي دورة أو احجز حصة تجريبية. سأرد عليك في أسرع وقت.</p>
+      <div class="contact-list">
+        <a href="https://wa.me/201093729626" target="_blank" rel="noopener"><span class="ic">💬</span><span class="txt">+20 109 372 9626</span></a>
+        <a href="mailto:mahmoudelshahatt1@gmail.com"><span class="ic">✉️</span><span class="txt">mahmoudelshahatt1@gmail.com</span></a>
+        <div><span class="ic">📍</span><span data-i18n="contact_loc">القاهرة، مصر</span></div>
+      </div>
+      <a class="btn btn-wa" id="contactWa" target="_blank" rel="noopener" style="margin-top:24px">💬 <span data-i18n="contact_btn">راسلني على واتساب</span></a>
+    </div>
+    <div class="pay-box reveal">
+      <h3>💳 <span data-i18n="pay_title">طرق الدفع</span></h3>
+      <p class="pay-sub" data-i18n="pay_sub">حوّل بسهولة على نفس الرقم</p>
+      <div class="pay-method">
+        <div class="badge vc"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vodafone"><path d="M12 0A12 12 0 0 0 0 12A12 12 0 0 0 12 24A12 12 0 0 0 24 12A12 12 0 0 0 12 0M16.25 1.12C16.57 1.12 16.9 1.15 17.11 1.22C14.94 1.67 13.21 3.69 13.22 6C13.22 6.05 13.22 6.11 13.23 6.17C16.87 7.06 18.5 9.25 18.5 12.28C18.54 15.31 16.14 18.64 12.09 18.65C8.82 18.66 5.41 15.86 5.39 11.37C5.38 8.4 7 5.54 9.04 3.85C11.04 2.19 13.77 1.13 16.25 1.12Z"/></svg></div>
+        <div class="info"><div class="num">01093729626</div><div class="nm" data-i18n="pay_vc">فودافون كاش</div></div>
+        <button class="copy-btn" data-copy="01093729626" aria-label="نسخ" title="نسخ">📋</button>
+      </div>
+      <div class="pay-method">
+        <div class="badge ip"><svg viewBox="138 450 748 102" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="InstaPay"><path fill="#8B4B9F" d="M684.6,485.6c-4.8,19.9-23.9,35.4-44.5,35.7c-12,0.2-24,0.1-36,0.1h-2.9c-2.4,7.3-4.8,14.5-7.2,21.7h-21.7c0.2-0.8,0.3-1.4,0.5-2c1.9-6,11-30.8,15-42.2c4.3,0,14.7,0.1,15.1,0.1c14.9,0,29.8,0,44.6,0c7.1,0,12.9-4.7,14.4-11.4c1-4.4-1.4-7.8-5.8-8.3c-1.2-0.1-2.3-0.1-3.5-0.1c-18.8,0-37.6,0-56.3,0h-3.2c7.5-7.7,14.6-15,21.9-22.5h2.2c13.9,0,27.9-0.1,41.8,0.1c3.5,0,7,0.3,10.4,1.2C681.9,461.2,687.9,472.2,684.6,485.6L684.6,485.6z"/><path fill="#8B4B9F" d="M734.3,456.5c2.8,0.8,5.2,3,6.7,5.4c1.8,3,2.5,6.3,3.4,9.7c1,3.7,1.8,7.5,2.8,11.3c1.8,7.5,3.7,15,5.6,22.5c3,12,6,24,8.9,36c0.1,0.4,0.2,0.9,0.3,1.6h-82.9c7-7.6,13.7-14.9,20.5-22.3h29.5c-2.7-10.3-5.3-20.4-8.1-31c-16.6,18-33,35.7-49.4,53.4h-27.1c0.9-1,1.5-1.8,2.2-2.5c21.8-23.8,43.7-47.5,65.4-71.3c2.9-3.2,6-6.2,9.5-8.7c3.1-2.2,6.7-4.5,10.7-4.5C732.9,456.2,733.6,456.3,734.3,456.5L734.3,456.5z"/><path fill="#8B4B9F" d="M752,456.8h28c4.9,11.6,9.8,23.1,14.9,35c12.2-11.8,24.1-23.4,36.1-35h27.3c0.2,0.2,0.4,0.5,0.6,0.7c-0.7,0.5-1.6,0.9-2.2,1.5c-19,18-38,36-56.9,54c-1,1-1.9,2.3-2.3,3.6c-3,8.8-5.8,17.6-8.7,26.4h-21.9c0.3-1,0.5-1.8,0.8-2.7c2.6-7.9,5.1-15.8,7.8-23.7c0.6-1.7,0.5-3.1-0.2-4.7c-7.5-17.6-14.9-35.2-22.4-52.9C752.6,458.5,752.4,457.8,752,456.8L752,456.8z"/><path fill="#500B75" d="M511.3,515.4c0.7,2.8,5.2,18.9,7.5,27c-0.2,0.2-0.5,0.4-0.7,0.6h-83c7-7.6,13.6-14.9,20.4-22.3h29.6c-2.7-10.4-5.4-20.5-8.2-31.1c-16.7,18-33.1,35.8-49.4,53.4h-26.9c0.5-0.7,0.8-1.2,1.2-1.6c23.2-25.3,46.4-50.7,69.7-75.9c2.2-2.4,4.7-4.4,7.4-6c4.4-2.6,10-4.9,14.7-1.5c3.7,2.6,5.3,7.1,6.2,11.3c1.2,5.5,2.7,10.9,4,16.4C506.4,495.6,508.9,505.5,511.3,515.4z"/><path fill="#500B75" d="M246.7,543.8c-4.3-1.3-6.9-4.3-9.3-8c-8-12.6-16.3-25.1-24.4-37.6c-0.5-0.7-1-1.4-1.7-2.4c-5.2,16-10.4,31.6-15.5,47.3H174c0.2-0.7,0.3-1.4,0.5-2c7.9-24.2,15.8-48.5,23.9-72.7c0.9-2.8,2.6-5.6,4.6-7.7c5.6-6,14-5.1,18.5,1.8c8.6,13.1,17.1,26.2,25.6,39.3c0.4,0.7,0.9,1.4,1.6,2.4c5.3-16.1,10.4-31.7,15.6-47.4h21.8c-0.2,0.9-0.4,1.7-0.7,2.5c-7.9,24.1-15.8,48.2-23.7,72.2c-0.2,0.7-0.5,1.5-0.8,2.2c-1.8,4.7-4.7,8.4-9.6,10.1H246.7L246.7,543.8z"/><path fill="#500B75" d="M141,542.4c2.2-6.4,4.4-12.7,6.5-19.1c7.1-21.5,14.1-43,21.1-64.5c0.2-0.6,0.4-1.2,0.7-1.9h21.9c-9.5,28.9-18.9,57.6-28.3,86.5H141C141,543,141,542.7,141,542.4z"/><path fill="#500B75" d="M382.9,456.7c-7.5,7.8-14.5,15.1-21.5,22.5c-5.7,0-11.3,0-16.9,0c-11,0-22,0-33,0c-3.9,0-5.6,2-5.3,6.2c1.1,0.2,2.4,0.6,3.7,0.6c11.3,0,22.6-0.1,33.9,0.1c3.7,0.1,7.5,0.4,11,1.5c10.2,3.1,14.8,12.4,12.2,23.7c-4.2,18.3-20.8,31.7-40,31.9c-21.2,0.2-42.4,0.1-63.6,0.1c-0.4,0-0.7-0.1-1.8-0.1c7.3-7.6,14.3-14.9,21.3-22.2c3.6,0,7.3,0,10.9,0c13,0,26,0.1,39-0.1c2.9,0,5.8-1,8.5-2c1.4-0.5,2.7-1.9,3.5-3.3c1.7-2.7,0.8-5.1-2.1-6.2c-1.8-0.6-3.8-0.9-5.7-0.9c-11.7-0.1-23.4,0-35.1-0.1c-2.9,0-5.8-0.3-8.5-1c-10.1-2.5-15.2-10.9-12.9-21.1c3.5-15.9,18.2-28.6,34.6-29.3c9.6-0.4,19.3-0.2,29-0.2c11.8,0,23.7,0,35.5,0C380.5,456.7,381.4,456.7,382.9,456.7L382.9,456.7z"/><path fill="#500B75" d="M396.4,543.1h-22c7-21.4,13.9-42.5,20.9-63.9h-29.2c7.4-7.8,14.4-15,21.4-22.4H460c-7.3,7.6-14.4,14.9-21.5,22.3h-21.2C410.4,500.5,403.4,521.7,396.4,543.1L396.4,543.1z"/><path fill="#FD6E66" d="M568.7,499.3c-0.6,0.4-1.2,0.8-1.8,1.3c-15.4,13.5-32.9,29-48.4,42.6c-7,0-16.5,0-23.1,0l49.9-44.2c-0.6-1.1-1.1-1.9-1.5-2.7c-7.6-13.3-15.2-26.6-22.7-39.9h23.4c0.3,0.8,0.6,1.6,1,2.3c7.2,12.6,14.5,25.3,21.7,37.9C567.6,497.3,568,498,568.7,499.3L568.7,499.3z"/><path fill="#FB6518" d="M601.8,498.7l-48.9,43.7l-0.8,0.7c-7,0.1-16.2,0-22.9-0.5c16.5-14.5,33-29.1,49.5-43.7c-8.2-14.3-16.3-28.5-24.4-42.6h23.4c0.3,0.6,0.5,1.3,0.9,1.9c7.4,13,14.5,25.3,21.8,38.3C600.8,497.1,600.4,496.6,601.8,498.7z"/></svg></div>
+        <div class="info"><div class="num">01093729626</div><div class="nm" data-i18n="pay_ip">إنستا باي</div></div>
+        <button class="copy-btn" data-copy="01093729626" aria-label="نسخ" title="نسخ">📋</button>
+      </div>
+      <p class="pay-note"><span>📌</span><span data-i18n="pay_note">بعد التحويل، أرسل صورة الإيصال على واتساب لتأكيد الاشتراك.</span></p>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <p data-i18n="foot">© 2026 محمود الشحات — تعلّم البرمجة. جميع الحقوق محفوظة.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- i18n dictionary ---------- */
+const I18N = {
+  ar:{
+    brand:"محمود الشحات",
+    nav_courses:"الدورات",nav_why:"لماذا أنا",nav_projects:"المشاريع",nav_about:"عن المدرّب",nav_faq:"الأسئلة",nav_contact:"تواصل",nav_cta:"ابدأ الآن",
+    hero_badge:"🚀 تعلّم البرمجة من مطوّر محترف",
+    hero_title:'تعلّم البرمجة من الصفر إلى <span class="hl">احتراف حقيقي</span>',
+    hero_lead:"دروس برمجة للأطفال والكبار في مصر — من ألعاب سكراتش وبايثون الممتعة، إلى بناء تطبيق أندرويد حقيقي بلغة كوتلن. تعليم عملي على يد مطوّر شحن أكثر من ٨ تطبيقات على جوجل بلاي.",
+    hero_cta1:"احجز حصة تجريبية",hero_cta2:"تصفّح الدورات",
+    hero_b1:"✅ بدون خبرة سابقة",hero_b2:"🎯 مشاريع عملية",hero_b3:"📱 أدوات حديثة",
+    stat1:"سنوات خبرة احترافية",stat2:"تطبيقات على جوجل بلاي",stat3:"طالب وطالبة",stat4:"مستخدم يومي للتطبيقات",
+    courses_eyebrow:"الدورات والأسعار",courses_title:"اختر المسار المناسب لك",courses_sub:"ثلاثة مسارات مصمّمة بعناية — للأطفال، للكبار، ولطلاب الثانوية. اشترك مباشرة عبر واتساب.",
+    badge_fun:"الأكثر متعة 🎮",badge_pro:"احترافي 💼",
+    kids_tag:"للأطفال (8–13 سنة)",kids_title:"البرمجة للأطفال",kids_stack:"Scratch + Python",
+    kids_f1:"تعلّم ممتع قائم على الألعاب",kids_f2:"يبني الطفل ألعابًا حقيقية مثل Flappy Bird و Catch the Apple و Mario",kids_f3:"لا يحتاج أي خبرة سابقة",kids_f4:"تنمية التفكير المنطقي والإبداع",
+    adults_tag:"للكبار والمبتدئين",adults_title:"البرمجة للكبار",adults_stack:"Kotlin + Android Development",
+    adults_f1:"من أساسيات كوتلن إلى بناء ونشر تطبيق أندرويد حقيقي",adults_f2:"مشاريع عملية بأسلوب احترافي",adults_f3:"أدوات حديثة مثل Jetpack Compose",adults_f4:"إرشاد مبني على خبرة صناعة حقيقية",
+    school_tag:"طلاب الثانوية",school_title:"مادة البرمجة للثانوية",school_stack:"دروس خصوصية لمنهج الثانوية",contact_price:"تواصل لمعرفة السعر",school_dur:"⏳ حسب احتياج الطالب",
+    school_f1:"دعم مركّز على الامتحانات",school_f2:"فهم عملي للمنهج وليس حفظًا فقط",school_f3:"متابعة فردية وحل تمارين",school_f4:"رفع الدرجات والثقة في المادة",
+    per_month:"ج.م / شهريًا",months3:"⏳ مدة الدورة: 3 أشهر",enroll:"اشترك الآن",
+    why_eyebrow:"لماذا تتعلّم معي",why_title:"خبرة صناعة حقيقية — لا مجرد نظريات",why_sub:"أعلّمك ما أستخدمه فعليًا في بناء تطبيقات يستعملها آلاف المستخدمين يوميًا.",
+    why1_t:"من قلب السوق",why1_d:"أكثر من 3 سنوات كمطوّر أندرويد محترف في Awamer Alshabaka (AAIT) و Alexon Incorp.",
+    why2_t:"تطبيقات حقيقية",why2_d:"شحنت أكثر من 8 تطبيقات على جوجل بلاي: تجارة إلكترونية، نقل، طب عن بُعد، وخدمات عند الطلب.",
+    why3_t:"تعليم عملي",why3_d:"كل درس يقودك لبناء شيء ملموس — لأن البرمجة تُتعلّم بالممارسة لا بالحفظ.",
+    proj_eyebrow:"ماذا ستبني",proj_title:"مشاريع تخرج بها بنهاية الدورة",proj_sub:"تنتهي كل دورة ومعك مشروع حقيقي تفتخر به وتضيفه لمعرض أعمالك.",
+    p1_t:"لعبة Flappy Bird",p1_d:"يبني الطفل لعبته الأولى خطوة بخطوة في سكراتش ويلعبها مع أصدقائه.",p1_tag:"Scratch · أطفال",
+    p2_t:"لعبة Catch the Apple",p2_d:"منطق برمجي ممتع: حركة، نقاط، ومستويات — أساسيات التفكير البرمجي.",p2_tag:"Python · أطفال",
+    p4_t:"لعبة Mario",p4_d:"يبني الطفل لعبة ماريو الشهيرة بالقفز والعقبات والمستويات في سكراتش.",p4_tag:"Scratch · أطفال",
+    p5_t:"لعبة Shoot the Enemy",p5_d:"لعبة إطلاق نار ممتعة: تصويب، أعداء، ونقاط — يتعلّم الطفل التحكم والمنطق.",p5_tag:"Scratch · أطفال",
+    p3_t:"تطبيق Family App",p3_d:"من أول شاشة حتى استخدامه على هاتفك، باستخدام كوتلن وأحدث أدوات تطوير الهاتف.",p3_tag:"Kotlin · كبار",
+    p6_t:"تطبيق متجر إلكتروني",p6_d:"واجهة منتجات، سلة شراء، وتسجيل دخول — تطبيق تجارة إلكترونية حقيقي بلغة كوتلن.",p6_tag:"Kotlin · كبار",
+    p7_t:"تطبيق الطقس",p7_d:"يتصل بـ API حقيقي لعرض حالة الطقس — يتعلّم الطالب الشبكات وعرض البيانات.",p7_tag:"Kotlin · كبار",
+    p8_t:"تطبيق المهام والملاحظات",p8_d:"حفظ المهام محليًا على الهاتف مع إضافة وحذف وتعديل — أساسيات قواعد البيانات.",p8_tag:"Kotlin · كبار",
+    p9_t:"تطبيق آلة حاسبة",p9_d:"أول تطبيق بسيط وسهل: أزرار وعمليات حسابية — بداية مثالية لفهم بناء الواجهات.",p9_tag:"Kotlin · كبار",
+    about_name:"محمود الشحات",about_role:"مطوّر أندرويد ومدرّب برمجة",portfolio:"أعمالي",
+    about_eyebrow:"عن المدرّب",about_h:"من يعلّمك؟",
+    about_p1:"محمود الشحات — مطوّر أندرويد بخبرة تزيد عن 3 سنوات في Awamer Alshabaka (AAIT) و Alexon Incorp. خريج كلية الهندسة جامعة المنصورة (هندسة الحاسبات ونظم التحكم)، وحاصل على شهادة تطوير أندرويد من Udacity / MCIT.",
+    about_p2:"شحنت أكثر من 8 تطبيقات على جوجل بلاي في مجالات التجارة الإلكترونية والنقل والطب عن بُعد والخدمات عند الطلب، يخدم بعضها آلاف المستخدمين يوميًا. أنقل لك هذه الخبرة العملية مباشرة.",
+    faq_eyebrow:"الأسئلة الشائعة",faq_title:"عندك سؤال؟",
+    faq1_q:"هل تحتاج الدورة خبرة سابقة؟",faq1_a:"لا. كل المسارات تبدأ من الصفر، سواء للأطفال أو الكبار، ونتدرّج خطوة بخطوة.",
+    faq2_q:"هل الدروس أونلاين أم حضوري؟",faq2_a:"يمكن ترتيب الدروس أونلاين بالكامل. تواصل معي عبر واتساب لتحديد الأنسب لك.",
+    faq3_q:"ما هي طرق الدفع؟",faq3_a:"الدفع عبر فودافون كاش أو إنستا باي على الرقم 01093729626.",
+    faq4_q:"كم مدة الدورة؟",faq4_a:"دورتا الأطفال والكبار مدتهما 3 أشهر لكل منهما. أما دعم الثانوية فيكون حسب احتياج الطالب.",
+    faq5_q:"ماذا سيبني الطالب فعليًا؟",faq5_a:"الأطفال يبنون ألعابًا حقيقية، والكبار يبنون وينشرون تطبيق أندرويد كامل على جوجل بلاي.",
+    contact_eyebrow:"تواصل معي",contact_h:"جاهز تبدأ رحلتك في البرمجة؟",contact_lead:"اسألني عن أي دورة أو احجز حصة تجريبية. سأرد عليك في أسرع وقت.",
+    contact_loc:"القاهرة، مصر",contact_btn:"راسلني على واتساب",
+    pay_title:"طرق الدفع",pay_sub:"حوّل بسهولة على نفس الرقم",pay_vc:"فودافون كاش",pay_ip:"إنستا باي",copy:"نسخ",copied:"تم النسخ ✓",pay_note:"بعد التحويل، أرسل صورة الإيصال على واتساب لتأكيد الاشتراك.",
+    foot:"© 2026 محمود الشحات — تعلّم البرمجة. جميع الحقوق محفوظة."
+  },
+  en:{
+    brand:"Mahmoud Elshahatt",
+    nav_courses:"Courses",nav_why:"Why Me",nav_projects:"Projects",nav_about:"Instructor",nav_faq:"FAQ",nav_contact:"Contact",nav_cta:"Start Now",
+    hero_badge:"🚀 Learn coding from a professional developer",
+    hero_title:'Learn to code from zero to <span class="hl">real mastery</span>',
+    hero_lead:"Programming lessons for kids and adults in Egypt — from fun Scratch & Python games to building a real Android app in Kotlin. Hands-on teaching from a developer who shipped 8+ apps on Google Play.",
+    hero_cta1:"Book a Free Trial",hero_cta2:"Browse Courses",
+    hero_b1:"✅ No experience needed",hero_b2:"🎯 Real projects",hero_b3:"📱 Modern tools",
+    stat1:"Years of pro experience",stat2:"Apps on Google Play",stat3:"Students taught",stat4:"Daily app users",
+    courses_eyebrow:"Courses & Pricing",courses_title:"Choose the right path for you",courses_sub:"Three carefully designed tracks — for kids, adults, and secondary students. Enroll directly via WhatsApp.",
+    badge_fun:"Most Fun 🎮",badge_pro:"Professional 💼",
+    kids_tag:"For Kids (ages 8–13)",kids_title:"Programming for Kids",kids_stack:"Scratch + Python",
+    kids_f1:"Fun, game-based learning",kids_f2:"Kids build real games like Flappy Bird, Catch the Apple & Mario",kids_f3:"No prior experience needed",kids_f4:"Builds logical thinking & creativity",
+    adults_tag:"For Adults & Beginners",adults_title:"Programming for Adults",adults_stack:"Kotlin + Android Development",
+    adults_f1:"From Kotlin basics to building & publishing a real Android app",adults_f2:"Hands-on, professional-style projects",adults_f3:"Modern tools like Jetpack Compose",adults_f4:"Mentoring grounded in real industry experience",
+    school_tag:"Secondary Students",school_title:"Secondary School Programming",school_stack:"Private tutoring for the curriculum",contact_price:"Contact for details",school_dur:"⏳ Based on the student's needs",
+    school_f1:"Exam-focused support",school_f2:"Practical understanding, not just memorizing",school_f3:"One-on-one follow-up & exercises",school_f4:"Higher grades & confidence in the subject",
+    per_month:"EGP / month",months3:"⏳ Duration: 3 months",enroll:"Enroll Now",
+    why_eyebrow:"Why learn with me",why_title:"Real industry experience — not just theory",why_sub:"I teach you what I actually use to build apps used by thousands of people every day.",
+    why1_t:"Straight from the field",why1_d:"3+ years as a professional Android developer at Awamer Alshabaka (AAIT) and Alexon Incorp.",
+    why2_t:"Real apps",why2_d:"Shipped 8+ apps on Google Play: e-commerce, ride-hailing, telemedicine, and on-demand services.",
+    why3_t:"Hands-on teaching",why3_d:"Every lesson leads you to build something real — because coding is learned by doing, not memorizing.",
+    proj_eyebrow:"What you'll build",proj_title:"Projects you'll finish the course with",proj_sub:"Every course ends with a real project you're proud of and can add to your portfolio.",
+    p1_t:"Flappy Bird Game",p1_d:"Kids build their first game step by step in Scratch and play it with friends.",p1_tag:"Scratch · Kids",
+    p2_t:"Catch the Apple Game",p2_d:"Fun coding logic: movement, scoring and levels — the basics of computational thinking.",p2_tag:"Python · Kids",
+    p4_t:"Mario Game",p4_d:"Kids build the famous Mario game with jumping, obstacles and levels in Scratch.",p4_tag:"Scratch · Kids",
+    p5_t:"Shoot the Enemy Game",p5_d:"A fun shooter: aiming, enemies and scoring — kids learn control and logic.",p5_tag:"Scratch · Kids",
+    p3_t:"Family App",p3_d:"From the first screen to running it on your own phone, using Kotlin & Jetpack Compose.",p3_tag:"Kotlin · Adults",
+    p6_t:"E-commerce App",p6_d:"Product list, shopping cart and login — a real e-commerce app built in Kotlin.",p6_tag:"Kotlin · Adults",
+    p7_t:"Weather App",p7_d:"Connects to a real API to show live weather — students learn networking and data display.",p7_tag:"Kotlin · Adults",
+    p8_t:"Tasks & Notes App",p8_d:"Save tasks locally on the phone with add, edit and delete — the basics of databases.",p8_tag:"Kotlin · Adults",
+    p9_t:"Calculator App",p9_d:"A simple, easy first app: buttons and arithmetic — the perfect start to understanding UI building.",p9_tag:"Kotlin · Adults",
+    about_name:"Mahmoud Elshahatt",about_role:"Android Developer & Coding Instructor",portfolio:"Portfolio",
+    about_eyebrow:"About the Instructor",about_h:"Who will teach you?",
+    about_p1:"Mahmoud Elshahatt — Android Developer with 3+ years of experience at Awamer Alshabaka (AAIT) and Alexon Incorp. Graduate of the Faculty of Engineering, Mansoura University (Computer Science & Control Systems), with an Android Development certification from Udacity / MCIT.",
+    about_p2:"Shipped 8+ apps on Google Play across e-commerce, ride-hailing, telemedicine and on-demand services, some serving thousands of daily users. I pass this hands-on experience straight to you.",
+    faq_eyebrow:"FAQ",faq_title:"Got a question?",
+    faq1_q:"Does the course need prior experience?",faq1_a:"No. Every track starts from zero — for kids and adults alike — and we progress step by step.",
+    faq2_q:"Are lessons online or in person?",faq2_a:"Lessons can be arranged fully online. Message me on WhatsApp to find what suits you best.",
+    faq3_q:"What are the payment methods?",faq3_a:"Payment via Vodafone Cash or InstaPay to the number 01093729626.",
+    faq4_q:"How long is the course?",faq4_a:"The kids and adults courses are 3 months each. Secondary-school support is based on the student's needs.",
+    faq5_q:"What will the student actually build?",faq5_a:"Kids build real games, and adults build & publish a complete Android app on Google Play.",
+    contact_eyebrow:"Get in touch",contact_h:"Ready to start your coding journey?",contact_lead:"Ask me about any course or book a free trial. I'll reply as soon as possible.",
+    contact_loc:"Cairo, Egypt",contact_btn:"Message me on WhatsApp",
+    pay_title:"Payment Methods",pay_sub:"Transfer easily to the same number",pay_vc:"Vodafone Cash",pay_ip:"InstaPay",copy:"Copy",copied:"Copied ✓",pay_note:"After transferring, send the receipt screenshot on WhatsApp to confirm your enrollment.",
+    foot:"© 2026 Mahmoud Elshahatt — Learn Programming. All rights reserved."
+  }
+};
+
+/* WhatsApp pre-filled messages per course */
+const WA_NUM="201093729626";
+const WA_MSG={
+  ar:{
+    general:"مرحبًا محمود، أريد حجز حصة تجريبية في البرمجة.",
+    contact:"مرحبًا محمود، لديّ استفسار عن دورات البرمجة.",
+    kids:"مرحبًا محمود، أريد الاشتراك في دورة «البرمجة للأطفال» (Scratch + Python).",
+    adults:"مرحبًا محمود، أريد الاشتراك في دورة «البرمجة للكبار» (Kotlin + Android).",
+    school:"مرحبًا محمود، أريد الاشتراك في دروس «مادة البرمجة للثانوية»."
+  },
+  en:{
+    general:"Hi Mahmoud, I'd like to book a free programming trial lesson.",
+    contact:"Hi Mahmoud, I have a question about your programming courses.",
+    kids:"Hi Mahmoud, I'd like to enroll in the 'Programming for Kids' course (Scratch + Python).",
+    adults:"Hi Mahmoud, I'd like to enroll in the 'Programming for Adults' course (Kotlin + Android).",
+    school:"Hi Mahmoud, I'd like to enroll in the 'Secondary School Programming' tutoring."
+  }
+};
+function waLink(key,lang){return `https://wa.me/${WA_NUM}?text=`+encodeURIComponent(WA_MSG[lang][key]);}
+
+let lang="ar";
+function applyLang(l){
+  lang=l;
+  const dict=I18N[l];
+  document.documentElement.lang=l;
+  document.documentElement.dir = l==="ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k=el.getAttribute("data-i18n");
+    if(dict[k]!==undefined) el.innerHTML=dict[k];
+  });
+  document.getElementById("langLabel").textContent = l==="ar" ? "EN" : "ع";
+  // wa links
+  document.getElementById("heroWa").href=waLink("general",l);
+  document.getElementById("contactWa").href=waLink("contact",l);
+  document.querySelectorAll(".enroll").forEach(a=>{
+    a.href=waLink(a.getAttribute("data-course"),l);
+  });
+}
+document.getElementById("langBtn").addEventListener("click",()=>applyLang(lang==="ar"?"en":"ar"));
+
+/* theme toggle */
+function applyTheme(t){
+  document.documentElement.setAttribute("data-theme",t);
+  document.getElementById("themeIcon").textContent = t==="dark" ? "☀️" : "🌙";
+  try{localStorage.setItem("theme",t);}catch(e){}
+}
+(function(){
+  let saved=null; try{saved=localStorage.getItem("theme");}catch(e){}
+  const sys=window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light";
+  applyTheme(saved||sys);
+})();
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  applyTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");
+});
+
+/* mobile menu */
+const navLinks=document.getElementById("navLinks");
+document.getElementById("menuBtn").addEventListener("click",()=>navLinks.classList.toggle("show"));
+navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navLinks.classList.remove("show")));
+
+/* FAQ accordion */
+document.querySelectorAll(".faq-item").forEach(item=>{
+  item.querySelector(".faq-q").addEventListener("click",()=>{
+    const open=item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(i=>{i.classList.remove("open");i.querySelector(".faq-a").style.maxHeight=null;});
+    if(!open){item.classList.add("open");const a=item.querySelector(".faq-a");a.style.maxHeight=a.scrollHeight+"px";}
+  });
+});
+
+/* floating code symbols in hero */
+(function(){
+  const field=document.getElementById("floatField");
+  const syms=["{ }","</>","( )","fun","val","#",";","=>","[]","🚀","⭐","🤖","💡","println","0 1"];
+  for(let i=0;i<22;i++){
+    const s=document.createElement("span");
+    s.textContent=syms[Math.floor(Math.random()*syms.length)];
+    s.style.left=Math.random()*100+"%";
+    s.style.top=Math.random()*100+"%";
+    s.style.fontSize=(1+Math.random()*2)+"rem";
+    s.style.animationDuration=(7+Math.random()*9)+"s";
+    s.style.animationDelay=(Math.random()*8)+"s";
+    field.appendChild(s);
+  }
+})();
+
+/* scroll reveal */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+/* animated counters */
+const counted=new Set();
+const cio=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && !counted.has(e.target)){
+      counted.add(e.target);
+      const el=e.target, target=+el.dataset.count, suffix=el.dataset.suffix||"";
+      const dur=1400, t0=performance.now();
+      function tick(now){
+        const p=Math.min((now-t0)/dur,1);
+        const val=Math.floor((1-Math.pow(1-p,3))*target);
+        el.textContent=val.toLocaleString(lang==="ar"?"ar-EG":"en-US")+suffix;
+        if(p<1)requestAnimationFrame(tick);
+        else el.textContent=target.toLocaleString(lang==="ar"?"ar-EG":"en-US")+suffix;
+      }
+      requestAnimationFrame(tick);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll("[data-count]").forEach(el=>cio.observe(el));
+
+/* copy payment numbers */
+document.querySelectorAll(".copy-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const num=btn.getAttribute("data-copy");
+    const done=()=>{
+      const span=btn.querySelector("span");
+      btn.classList.add("copied");
+      const prev=btn.textContent;
+      if(span){span.textContent=I18N[lang].copied;}else{btn.textContent="✓";}
+      setTimeout(()=>{btn.classList.remove("copied");if(span){span.textContent=I18N[lang].copy;}else{btn.textContent=prev;}},1600);
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(num).then(done).catch(done);
+    }else{
+      const ta=document.createElement("textarea");ta.value=num;document.body.appendChild(ta);
+      ta.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(ta);done();
+    }
+  });
+});
+
+/* init */
+applyLang("ar");
+</script>
+</body>
+</html>
